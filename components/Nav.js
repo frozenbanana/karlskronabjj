@@ -10,7 +10,7 @@ const NavLink = (props) => {
 
   return (
   <NextLink href={props.href} passHref>
-      <Link textStyle="a" style={isActive ? {fontWeight: 'bold'} : {} } color="gray">{props.text.toUpperCase()}></Link>
+      <Link textStyle="a" style={isActive ? {fontWeight: 'bold'} : {} } color="gray">{props.text.toUpperCase()}&gt;</Link>
   </NextLink>
 );
   }
