@@ -1,52 +1,16 @@
 import {
   Container,
-  Flex,
-  Box,
-  AspectRatio,
-  Image,
-  Text,
 } from "@chakra-ui/react";
 import dynamic from "next/dynamic";
+import Section from '../components/Section';
+import MapFrame from '../components/Map';
+
 import useMediaQuery from "../hooks/useMediaQuery";
 const DynamicScrollingCanvas = dynamic(
   () => import("../components/ScrollingCanvas"),
   { ssr: false }
 );
 
-const Section = (props) => {
-  const h2Text = props.textData.slice(0, 1);
-  const pTexts = props.textData.slice(1);
-  const isColumn = props.flexDir == "column";
-  const isReversed = props.flexDir == "row-reverse";
-  const childWidth = isColumn ? "100%" : "50%";
-  return (
-    <Flex
-      flexDir={props.flexDir}
-      marginTop="16px"
-      justifyContent="space-between"
-      style={{ columnGap: props.splitMargin }}
-    >
-      <Box
-        width={childWidth}
-        flexDir="column"
-        padding="8px 0"
-        textAlign={isReversed ? "right" : "left"}
-      >
-        <Text textStyle="h2">{h2Text}</Text>
-        {pTexts.map((pText, idx) => (
-          <Text key={`p_${idx}`} textStyle="p">
-            {pText}
-          </Text>
-        ))}
-      </Box>
-      <AspectRatio width={childWidth} maxW={childWidth} ratio={16 / 9}>
-        {props.mediaComponent || (
-          <Image src={props.imgSrc} alt={props.imgAlt} objectFit="cover" />
-        )}
-      </AspectRatio>
-    </Flex>
-  );
-};
 
 const HeroSection = () => {
   const images = [];
@@ -76,6 +40,7 @@ const FindUsSection = ({flexDir}) => (
     imgSrc="map.jpg"
     imgAlt="map to karlskrona BJJ"
     splitMargin="16px"
+    mediaComponent={<MapFrame />}
   />
 );
 

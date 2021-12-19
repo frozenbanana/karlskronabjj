@@ -1,0 +1,17 @@
+.gmapCanvas {
+  overflow: hidden;
+  background: none !important;
+  height: 100%;
+  width: 100%;
+}
+
+.mapOuter {
+  position: relative;
+  height: 100%;
+  width: 100%;
+}
+
+.mapFrame {
+  height: 100%;
+  width: 100%;
+}
