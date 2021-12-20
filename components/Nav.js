@@ -6,7 +6,6 @@ const NavLink = (props) => {
   const router = useRouter();
 
   const isActive = router.pathname == props.href;
-  console.log(`${router.pathname} == ${props.href}`)
 
   return (
   <NextLink href={props.href} passHref>

@@ -15,7 +15,7 @@ const Section = (props) => {
   return (
     <Flex
       flexDir={props.flexDir}
-      marginTop="16px"
+      marginBottom={ {base: '64px', lg: '16px'} }
       justifyContent="space-between"
       style={{ columnGap: props.splitMargin }}
     >

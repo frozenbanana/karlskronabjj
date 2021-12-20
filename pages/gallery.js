@@ -16,7 +16,7 @@ const ImageList = ({ galleryPath, images }) => (
         key={`img${idx}`}
         src={galleryPath + imgSrc}
         alt={`Karlskrona Gallery Image Nr.${idx}`}
-        width="960px"
+        width="800px"
         height="520px"
       />
       </Box>

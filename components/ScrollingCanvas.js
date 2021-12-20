@@ -22,7 +22,6 @@ export default function ScrollingCanvas(props) {
 
   const updateImage = (nextImgIndex) => {
     const correctedIndex = (60 + nextImgIndex) % images.length;
-    console.log('correctedIndex', correctedIndex)
     currentImg.src = images[correctedIndex];
     canvasContext.drawImage(currentImg, 0, 0);
   };
@@ -36,7 +35,6 @@ export default function ScrollingCanvas(props) {
       images.length - 1,
       Math.floor(scrollFraction * images.length)
     );
-    console.log('scroll progress', progress);
 
     if (canvasContext) { 
         requestAnimationFrame(() => updateImage(frameIndex + progress));
