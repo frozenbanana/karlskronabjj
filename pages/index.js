@@ -22,7 +22,7 @@ const HeroSection = () => {
       flexDir="column"
       textData={[
         "välkommen till karlskrona BJJ",
-        "SPORT, GRAPPLING & SJÄLVFÖRSVAR",
+        "SPORT, GRAPPLING & brasiliansk jiu jitsu",
       ]}
       imgSrc="https://bit.ly/naruto-sage"
       imgAlt="naruto"
