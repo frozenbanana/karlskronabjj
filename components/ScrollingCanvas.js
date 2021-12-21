@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, { useRef, useState, useEffect, useCallback } from "react";
 
 let frameIndex = 0;
 export default function ScrollingCanvas(props) {
@@ -7,43 +7,44 @@ export default function ScrollingCanvas(props) {
   const [canvasContext, setCanvasContext] = useState(null);
   const loadedImages = [];
 
+  const updateImage = useCallback((nextImgIndex) => {
+    if (!canvasContext) return;
+    frameIndex = (nextImgIndex) % loadedImages.length;
+    canvasContext.drawImage(loadedImages[frameIndex], 0, 0);
+}, [canvasContext, loadedImages]);
+
+
   // Setup scroll and canvas context
   useEffect(() => {
     setCanvasContext(canvasRef.current.getContext("2d"));
+    const onScroll = () => {
+      const html = document.documentElement;
+      const scrollTop = html.scrollTop;
+      const maxScrollTop = (html.scrollHeight - window.innerHeight);
+      const scrollFraction = scrollTop / maxScrollTop;
+      frameIndex = Math.min(
+        images.length - 1,
+        Math.floor(scrollFraction * images.length)
+      );
+  
+      requestAnimationFrame(() => updateImage(frameIndex));
+    };
     window.addEventListener("scroll", onScroll);
-  }, [canvasRef, canvasContext]);
+  }, [canvasRef, canvasContext, images, updateImage]);
 
-  // Draw first image
+  // Load images and do first render
   useEffect(() => {
-    if (!canvasContext) return;
     for (const imgSrc of images) {
       const imgObj = new Image(width, height);
       imgObj.src = imgSrc;
       imgObj.alt = "bjj-warmup";
       loadedImages.push(imgObj);
     }
-    canvasContext.drawImage(loadedImages[frameIndex], 0, 0);
-  }, [canvasContext, images]);
 
-  const updateImage = (nextImgIndex) => {       
-    frameIndex = (nextImgIndex) % images.length;
-    canvasContext.drawImage(loadedImages[frameIndex], 0, 0);
-  };
+    requestAnimationFrame(() => updateImage(frameIndex));
 
-  const onScroll = () => {
-    const html = document.documentElement;
-    const scrollTop = html.scrollTop;
-    const maxScrollTop = (html.scrollHeight - window.innerHeight);
-    const scrollFraction = scrollTop / maxScrollTop;
-    frameIndex = Math.min(
-      images.length - 1,
-      Math.floor(scrollFraction * images.length)
-    );
+  }, [images, height, width, loadedImages, updateImage]);
 
-    if (canvasContext) { 
-        requestAnimationFrame(() => updateImage(frameIndex));
-    }
-  };
   return (
     <canvas width={width} height={height} ref={canvasRef}></canvas>
   );
