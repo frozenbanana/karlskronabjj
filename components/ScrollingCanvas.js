@@ -5,7 +5,7 @@ export default function ScrollingCanvas(props) {
   const { images, fallbackIndex, width, height } = props;
   const canvasRef = useRef(null);
   const [canvasContext, setCanvasContext] = useState(null);
-  const currentImg = new Image(width, height);
+  const loadedImages = [];
 
   // Setup scroll and canvas context
   useEffect(() => {
@@ -16,14 +16,18 @@ export default function ScrollingCanvas(props) {
   // Draw first image
   useEffect(() => {
     if (!canvasContext) return;
-    currentImg.src = images[frameIndex];
-    currentImg.onload = () => canvasContext.drawImage(currentImg, 0, 0);
+    for (const imgSrc of images) {
+      const imgObj = new Image(width, height);
+      imgObj.src = imgSrc;
+      imgObj.alt = "bjj-warmup";
+      loadedImages.push(imgObj);
+    }
+    canvasContext.drawImage(loadedImages[frameIndex], 0, 0);
   }, [canvasContext, images]);
 
-  const updateImage = (nextImgIndex) => {
-    const correctedIndex = (60 + nextImgIndex) % images.length;
-    currentImg.src = images[correctedIndex];
-    canvasContext.drawImage(currentImg, 0, 0);
+  const updateImage = (nextImgIndex) => {       
+    frameIndex = (nextImgIndex) % images.length;
+    canvasContext.drawImage(loadedImages[frameIndex], 0, 0);
   };
 
   const onScroll = () => {
@@ -31,13 +35,13 @@ export default function ScrollingCanvas(props) {
     const scrollTop = html.scrollTop;
     const maxScrollTop = (html.scrollHeight - window.innerHeight);
     const scrollFraction = scrollTop / maxScrollTop;
-    let progress = Math.min(
+    frameIndex = Math.min(
       images.length - 1,
       Math.floor(scrollFraction * images.length)
     );
 
     if (canvasContext) { 
-        requestAnimationFrame(() => updateImage(frameIndex + progress));
+        requestAnimationFrame(() => updateImage(frameIndex));
     }
   };
   return (
