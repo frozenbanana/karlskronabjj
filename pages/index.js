@@ -14,8 +14,8 @@ const DynamicScrollingCanvas = dynamic(
 
 const HeroSection = () => {
   const images = [];
-  for (let i = 1; i < 123; i++)
-    images.push(`heroImages/bjjhero-${i.toString().padStart(3, "0")}.jpg`);
+  for (let i = 1; i < 68; i++)
+    images.push(`heroImages/bjjhero-${i}.jpg`);
 
   return (
     <Section

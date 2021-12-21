@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect, useCallback } from "react";
+import {useRef, useState, useEffect, useCallback } from "react";
 
 let frameIndex = 0;
 export default function ScrollingCanvas(props) {
@@ -8,8 +8,9 @@ export default function ScrollingCanvas(props) {
   const [loadedImages, setLoadedImages] = useState([]);
 
   const updateImage = useCallback((nextImgIndex) => {
-    if (!canvasContext) return;
+    if (!canvasContext || !loadedImages.length) return;
     frameIndex = (nextImgIndex) % loadedImages.length;
+    console.log(loadedImages[frameIndex]);
     canvasContext.drawImage(loadedImages[frameIndex], 0, 0);
 }, [canvasContext, loadedImages]);
 
@@ -20,7 +21,7 @@ export default function ScrollingCanvas(props) {
     const onScroll = () => {
       const html = document.documentElement;
       const scrollTop = html.scrollTop;
-      const maxScrollTop = (html.scrollHeight - window.innerHeight);
+      const maxScrollTop = (html.scrollHeight - window.innerHeight * 1.3);
       const scrollFraction = scrollTop / maxScrollTop;
       frameIndex = Math.min(
         images.length - 1,
@@ -47,7 +48,5 @@ export default function ScrollingCanvas(props) {
 
   }, [images, height, width, loadedImages, updateImage]);
 
-  return (
-    <canvas width={width} height={height} ref={canvasRef}></canvas>
-  );
+  return <canvas width={width} height={height} ref={canvasRef}></canvas>;
 }
