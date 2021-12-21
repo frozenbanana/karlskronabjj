@@ -5,7 +5,7 @@ export default function ScrollingCanvas(props) {
   const { images, fallbackIndex, width, height } = props;
   const canvasRef = useRef(null);
   const [canvasContext, setCanvasContext] = useState(null);
-  const loadedImages = [];
+  const [loadedImages, setLoadedImages] = useState([]);
 
   const updateImage = useCallback((nextImgIndex) => {
     if (!canvasContext) return;
@@ -40,6 +40,8 @@ export default function ScrollingCanvas(props) {
       imgObj.alt = "bjj-warmup";
       loadedImages.push(imgObj);
     }
+
+    setLoadedImages(loadedImages);
 
     requestAnimationFrame(() => updateImage(frameIndex));
 
