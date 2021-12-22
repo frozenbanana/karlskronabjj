@@ -10,7 +10,6 @@ export default function ScrollingCanvas(props) {
   const updateImage = useCallback((nextImgIndex) => {
     if (!canvasContext || !loadedImages.length) return;
     frameIndex = (nextImgIndex) % loadedImages.length;
-    console.log(loadedImages[frameIndex]);
     canvasContext.drawImage(loadedImages[frameIndex], 0, 0);
 }, [canvasContext, loadedImages]);
 

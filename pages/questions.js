@@ -1,4 +1,5 @@
 import { Container, Box, Text, Flex } from "@chakra-ui/layout";
+import Head from "next/head";
 
 const questionsData = [
     {
@@ -22,8 +23,19 @@ const questionsData = [
 ];
 
 export default function Questions() {
+    const seo = {
+        title: 'Vanliga frågor',
+        description: 'Se svaren på frågorna vi får in. Vi erbjuder två veckor gratis testperiod! Kom som du är med vanliga gymkläder.'
+    };
+
     return (
     <Container maxW="container.xl">
+        <Head>
+            <title>{seo.title}</title>
+            <meta name="description" content={seo.description} />
+            <meta property="og:title" content={seo.title} />
+            <meta property="og:description" content={seo.description} />
+        </Head>
         <Flex direction="column" justifyContent='space-evenly' align="right">
         {questionsData.map( (q,idx) => (
                     <Box key={`q${idx}`} maxW="100%" marginBottom="32px">

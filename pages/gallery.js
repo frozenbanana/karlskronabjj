@@ -1,6 +1,6 @@
 import { Container, Box, Text, Flex } from "@chakra-ui/layout";
 import Image from "next/image";
-
+import Head from "next/head";
 
 
 const galleryData = [{
@@ -25,8 +25,18 @@ const ImageList = ({ galleryPath, images }) => (
 );
 
 export default function Gallery() {
+  const seo = {
+    title: 'Karlskrona BJJ: Vårt Galleri',
+    description: 'Se hur det kan se ut på klubben. Vi erbjuder två veckor gratis testperiod! Kom som du är med vanliga gymkläder.',
+  }
   return (
     <Container maxW="container.xl">
+      <Head>
+        <title>{seo.title}</title>
+        <meta name="description" content={seo.description} />
+        <meta property="og:title" content={seo.title} />
+        <meta property="og:description" content={seo.description} />
+      </Head>
         {galleryData.map((gallery, idx) => (
           <Box key={`gallery${idx}`}>
             <Text

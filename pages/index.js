@@ -1,6 +1,7 @@
 import {
   Container,
 } from "@chakra-ui/react";
+import Head from "next/head";
 import dynamic from "next/dynamic";
 import Section from '../components/Section';
 import MapFrame from '../components/Map';
@@ -76,8 +77,18 @@ const PriceSection = ({flexDir}) => (
 
 export default function Home() {
   const isDesktop = useMediaQuery('(min-width: 960px)');
+  const seo = {
+    title: 'Karlskrona BJJ: Stadens varmaste kampsportsklubb!',
+    description: 'Testa Brasiliansk Ju Jitsu hos oss. Två veckor gratis! Kom som du är med vanliga gymkläder',
+  }
   return (
     <Container maxW="container.xl">
+      <Head>
+        <title>{seo.title}</title>
+        <meta name="description" content={seo.description} />
+        <meta property="og:title" content={seo.title} />
+        <meta property="og:description" content={seo.description} />
+      </Head>
       <HeroSection />
       <FindUsSection flexDir={isDesktop ? 'row' : 'column'}/>
       <SchedualSection flexDir={isDesktop ? 'row-reverse' : 'column'}/>
