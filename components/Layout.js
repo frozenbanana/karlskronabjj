@@ -1,6 +1,5 @@
 import { Container } from "@chakra-ui/layout";
 import styles from '../styles/Layout.module.css';
-import Script from 'next/script';
 import Head from "next/head";
 import Footer from "./Footer";
 import Nav from "./Nav";
