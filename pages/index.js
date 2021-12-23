@@ -1,10 +1,8 @@
-import {
-  Container,
-} from "@chakra-ui/react";
+import { Container } from "@chakra-ui/react";
 import Head from "next/head";
 import dynamic from "next/dynamic";
-import Section from '../components/Section';
-import MapFrame from '../components/Map';
+import Section from "../components/Section";
+import MapFrame from "../components/Map";
 
 import useMediaQuery from "../hooks/useMediaQuery";
 const DynamicScrollingCanvas = dynamic(
@@ -12,11 +10,9 @@ const DynamicScrollingCanvas = dynamic(
   { ssr: false }
 );
 
-
 const HeroSection = () => {
   const images = [];
-  for (let i = 1; i < 68; i++)
-    images.push(`heroImages/bjjhero-${i}.jpg`);
+  for (let i = 1; i < 68; i++) images.push(`heroImages/bjjhero-${i}.jpg`);
 
   return (
     <Section
@@ -34,7 +30,7 @@ const HeroSection = () => {
   );
 };
 
-const FindUsSection = ({flexDir}) => (
+const FindUsSection = ({ flexDir }) => (
   <Section
     flexDir={flexDir}
     textData={["Hitta hit", "SALTSJÖBADSVÄGEN 1C", "371 32", "KARLSKRONA"]}
@@ -45,7 +41,7 @@ const FindUsSection = ({flexDir}) => (
   />
 );
 
-const SchedualSection= ({flexDir}) => (
+const SchedualSection = ({ flexDir }) => (
   <Section
     flexDir={flexDir}
     textData={[
@@ -54,13 +50,13 @@ const SchedualSection= ({flexDir}) => (
       "TORSDAG 19.00 - 21.00",
       "LÖRDAG 09.30 - 11.00",
     ]}
-    imgSrc="https://bit.ly/naruto-sage"
-    imgAlt="naruto"
+    imgSrc="train.jpg"
+    imgAlt="BJJ instruction"
     splitMargin="8px"
   />
 );
 
-const PriceSection = ({flexDir}) => (
+const PriceSection = ({ flexDir }) => (
   <Section
     flexDir={flexDir}
     textData={[
@@ -69,18 +65,19 @@ const PriceSection = ({flexDir}) => (
       "vuxen 1000 sek / termin",
       "ungdom 500 SEK / TERMIN",
     ]}
-    imgSrc="https://bit.ly/naruto-sage"
-    imgAlt="naruto"
+    imgSrc="price.jpg"
+    imgAlt="BJJ armbar"
     splitMargin="8px"
   />
 );
 
 export default function Home() {
-  const isDesktop = useMediaQuery('(min-width: 960px)');
+  const isDesktop = useMediaQuery("(min-width: 960px)");
   const seo = {
-    title: 'Karlskrona BJJ: Stadens varmaste kampsportsklubb!',
-    description: 'Testa Brasiliansk Ju Jitsu hos oss. Två veckor gratis! Kom som du är med vanliga gymkläder',
-  }
+    title: "Karlskrona BJJ: Stadens varmaste kampsportsklubb!",
+    description:
+      "Testa Brasiliansk Ju Jitsu hos oss. Två veckor gratis! Kom som du är med vanliga gymkläder",
+  };
   return (
     <Container maxW="container.xl">
       <Head>
@@ -90,9 +87,9 @@ export default function Home() {
         <meta property="og:description" content={seo.description} />
       </Head>
       <HeroSection />
-      <FindUsSection flexDir={isDesktop ? 'row' : 'column'}/>
-      <SchedualSection flexDir={isDesktop ? 'row-reverse' : 'column'}/>
-      <PriceSection flexDir={isDesktop ? 'row' : 'column'}/>
+      <FindUsSection flexDir={isDesktop ? "row" : "column"} />
+      <SchedualSection flexDir={isDesktop ? "row-reverse" : "column"} />
+      <PriceSection flexDir={isDesktop ? "row" : "column"} />
     </Container>
   );
 }
