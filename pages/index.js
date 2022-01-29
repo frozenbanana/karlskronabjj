@@ -46,8 +46,8 @@ const SchedualSection = ({ flexDir }) => (
     flexDir={flexDir}
     textData={[
       "Schema",
-      "TISDAG 19.00 - 21.00",
-      "TORSDAG 19.00 - 21.00",
+      "TISDAG 19.00 - 20.30",
+      "TORSDAG 19.00 - 20.30",
       "FREDAG 17.00 - 18.30",
       "LÖRDAG 09.30 - 11.00",
     ]}
